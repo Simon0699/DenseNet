@@ -45,15 +45,13 @@ After Dense-4:     1056 + 24×48 = 2208
 DenseNet161/
 ├── build.ipynb          # Model definition + training loop (Google Colab)
 ├── evaluation.ipynb     # Top-1 / Top-5 accuracy on ImageNet validation set
-├── densenet161_checkpoint.pt   # Saved model checkpoint
-└── imagenet_500/        # Local 500-image evaluation cache
 ```
 
 ---
 
 ## Training
 
-Training was run on Google Colab with a GPU. The full ImageNet-1k training split (~1.28M images) was loaded in **streaming mode** from Hugging Face to avoid downloading the entire dataset locally.
+Training was run on Google Colab with an 80GB NVIDIA A100. The full ImageNet-1k training split (~1.28M images) was loaded in **streaming mode** from Hugging Face to avoid downloading the entire dataset locally.
 
 - **Optimizer:** Adam (lr=1e-3)
 - **Loss:** CrossEntropyLoss
@@ -73,8 +71,21 @@ Evaluated on the full ImageNet-1k validation set (50,000 images) using the saved
 ```
 
 Metrics reported: **Top-1 accuracy** and **Top-5 accuracy**.
+Top-1 Accuracy: 44.41%
+Top-5 Accuracy: 70.00%
+
 
 ---
+
+## Additional Notes
+Both Top-1 and Top-5 accuracy are lower than other implementations of this architecture. The main reason for this is that I only trained for 3 epochs while the original paper trains for 90 epochs. They start with a much higher learning rate of LR = 0.1 and cut it by a factor of 10 at epochs 30 and 60. The lack of performance within this implementation comes down to undertraining.
+
+Just training this model on 1 NVIDIA A100 GPU for 3 epochs took 3 hours worth of run time in Colab. Cost me roughly 3-4$. This was a good exercise in implementing and learning how to train large models, but I am not about to spend even more money on GPU run time so here ya go.
+
+Furthermore, if you really wanted the right weights someone else already pretrained it somewhere, so just go find that lol.
+
+Stay tuned for more implementations by the silly goose himself. 
+
 
 ## Requirements
 
@@ -91,3 +102,5 @@ tqdm
 ## References
 
 - Huang et al., *Densely Connected Convolutional Networks*, CVPR 2017
+
+
