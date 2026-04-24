@@ -82,7 +82,7 @@ Both Top-1 and Top-5 accuracy are lower than other implementations of this archi
 
 Just training this model on 1 NVIDIA A100 GPU for 3 epochs took 3 hours worth of run time in Colab. Cost me roughly 3-4$. This was a good exercise in implementing and learning how to train large models, but I am not about to spend even more money on GPU run time so here ya go.
 
-Furthermore, if you really wanted the right weights someone else already pretrained it somewhere, so just go find that lol.
+If I really wanted to get top notch performance I would implement the learning rate scheduler so that the model trains better deeper into the epochs, implement some form of data augmentation, train for more epochs. Blah blah blah. That was not the point of this as the weights this pretrained model are already out there. 
 
 Stay tuned for more implementations by the silly goose himself. 
 
